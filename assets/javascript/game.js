@@ -30,7 +30,7 @@ function startGame() {
         
     var target = crystals[i];
     target.value = Math.floor(Math.random() * 12) + 1;
-    console.log(target.value);
+    
 
     $("#crystal-0").attr("value", crystals[0].value);
     $("#crystal-1").attr("value", crystals[1].value);
@@ -39,5 +39,65 @@ function startGame() {
     
    
 
+    }
 }
+
+function winAlert() {
+
+    wins++;
+    $("#wins").text("Wins: " + wins);
+
+    setTimeout(function() { alert("Winner!"); }, 5);
+    
+    setTimeout(function() {startGame(); }, 10);
 }
+
+function lossAlert() {
+
+    losses++;
+    $("#losses").text("Losses: " + losses);
+    
+
+    setTimeout(function() { alert("Take this L!"); }, 5);
+
+    setTimeout(function() {startGame(); }, 10);
+}
+
+
+$(document).ready(function() {
+
+
+    $("#wins").text("Wins: " + wins);
+    $("#losses").text("Losses: " + losses);
+    
+    startGame();
+
+    $(".crystalButton").on("click", function(){
+
+        var btnValue = this.value;
+        btnValue = parseInt(btnValue);
+
+        currentScore += btnValue;
+        $("#currentScore").text(currentScore);
+
+        
+        
+        if(currentScore === goal){
+
+            winAlert()
+
+        
+
+        }else if(currentScore > goal){
+
+            lossAlert()
+
+
+        }else{}
+
+
+
+
+
+});
+});
